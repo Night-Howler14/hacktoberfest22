@@ -1,7 +1,11 @@
-package Assignment; 
 import java.util.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class User {
+import javax.lang.model.util.ElementScanner14;
+
+public abstract class User {
     String name;
     String dateofbirth;
     int userID;
@@ -39,8 +43,8 @@ public class User {
     public int showdetails(String yearofbirth) {
 
         String year;
-
-        year = dateofbirth.substring(6);
+        final int x = 6;
+        year = dateofbirth.substring(x);
 
         if (year.equals(yearofbirth)) {
             System.out.println("The name of user is " + name);
@@ -64,6 +68,7 @@ public class User {
             return 0;
         }
     }
+
     public void display() {
         System.out.println("The name of user is " + name);
         System.out.printf("The Date of Birth of user is %s\n", dateofbirth);
@@ -81,13 +86,14 @@ public class User {
         System.out.println("        1.Student  ");
         System.out.println("        2.Staff    ");
         System.out.println("        3.Faculty  ");
-        System.out.println("        4.Exit     ");
+        System.out.println("        4.User   ");
+        System.out.println("        5.Exit   ");
 
         int n;
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
 
-        while (n != 4) {
+        while (n != 5) {
             switch (n) {
                 case 1: {
 
@@ -156,7 +162,7 @@ public class User {
                     }
                     break;
 
-                }	
+                }
 
                 case 2: {
                     System.out.println("       Menu    ");
@@ -374,8 +380,14 @@ public class User {
                             break;
 
                         }
+
                     }
 
+                }
+                case 4: {
+
+                    System.out.println("Object of an Abstract class can't be created");
+                    break;
                 }
             }
 
@@ -383,17 +395,16 @@ public class User {
             System.out.println("        1.Student  ");
             System.out.println("        2.Staff    ");
             System.out.println("        3.Faculty  ");
-            System.out.println("        4.Exit     ");
+            System.out.println("        4.User  ");
+            System.out.println("        5.Exit     ");
             System.out.println("Enter your choice ");
             n = sc.nextInt();
         }
-        sc.close();
-        }
-    
+    }
 
 }
 
-class Student extends User {
+final class Student extends User {
 
     int rollno;
     int sem;
@@ -411,7 +422,7 @@ class Student extends User {
         cpi = cpi1;
     }
 
-    public void setdetails() {
+    final public void setdetails() {
         super.setdetails();
         int rno;
         int sem1;
@@ -432,7 +443,7 @@ class Student extends User {
 
     }
 
-    public int showdetails(String yop) {
+    final public int showdetails(String yop) {
         if (super.showdetails(yop) == 1) {
             System.out.println("The Rollno " + rollno);
             System.out.printf("The Semester is %d\n", sem);
@@ -445,7 +456,7 @@ class Student extends User {
 
     }
 
-    public int displaydetails(int userid) {
+    final public int displaydetails(int userid) {
         if (super.displaydetails(userid) == 1) {
             System.out.println("The Rollno " + rollno);
             System.out.printf("The Semester is %d\n", sem);
@@ -458,7 +469,7 @@ class Student extends User {
 
 }
 
-class Staff extends User {
+final class Staff extends User {
 
     int employeeid;
     String secname;
@@ -475,7 +486,7 @@ class Staff extends User {
         designation = degi;
     }
 
-    int search(int eid) {
+    final int search(int eid) {
         if (eid == employeeid) {
             return 1;
         } else {
@@ -483,7 +494,7 @@ class Staff extends User {
         }
     }
 
-    public void setdetails() {
+    final public void setdetails() {
         super.setdetails();
         int eid;
         String sname;
@@ -505,7 +516,7 @@ class Staff extends User {
 
     }
 
-    public static void Compare(Staff fac1, Staff fac2) {
+    final public static void Compare(Staff fac1, Staff fac2) {
         if (fac1.designation == fac2.designation) {
             System.out.println("Yes they have same designation");
         } else {
@@ -513,7 +524,7 @@ class Staff extends User {
         }
     }
 
-    public int showdetails(String yop) {
+    final public int showdetails(String yop) {
         if (super.showdetails(yop) == 1) {
             System.out.println("Employee Id " + employeeid);
             System.out.printf("The Section name is %s\n", secname);
@@ -526,7 +537,7 @@ class Staff extends User {
 
     }
 
-    public int displaydetails(int userid) {
+    final public int displaydetails(int userid) {
         if (super.displaydetails(userid) == 1) {
             System.out.println("Employee Id " + employeeid);
             System.out.printf("The Section name is %s\n", secname);
@@ -537,7 +548,7 @@ class Staff extends User {
         }
     }
 
-    public int displaybyeid(int eid) {
+    final public int displaybyeid(int eid) {
         if (search(eid) == 1) {
             super.display();
             System.out.println("Employee Id " + employeeid);
@@ -552,7 +563,7 @@ class Staff extends User {
 
 }
 
-class Faculty extends User {
+final class Faculty extends User {
     int employeeID;
     String departmentName;
     int noOfPublications;
@@ -568,7 +579,7 @@ class Faculty extends User {
 
     }
 
-    int search(int eid) {
+    final int search(int eid) {
         if (eid == employeeID) {
             return 1;
         } else {
@@ -576,7 +587,7 @@ class Faculty extends User {
         }
     }
 
-    public void setdetails() {
+    final public void setdetails() {
         super.setdetails();
         int eid;
         String dname;
@@ -597,7 +608,7 @@ class Faculty extends User {
 
     }
 
-    public void Compare(Faculty fac1, Faculty fac2) {
+    final public void Compare(Faculty fac1, Faculty fac2) {
         if (fac1.departmentName == fac2.departmentName) {
             System.out.println("Yes they have same department");
         } else {
@@ -605,7 +616,7 @@ class Faculty extends User {
         }
     }
 
-    public int showdetails(String yop) {
+    final public int showdetails(String yop) {
         if (super.showdetails(yop) == 1) {
             System.out.println("Employee Id " + employeeID);
             System.out.printf("The Departmentname is %s\n", departmentName);
@@ -618,7 +629,7 @@ class Faculty extends User {
 
     }
 
-    public int displaybyeid(int eid) {
+    final public int displaybyeid(int eid) {
         if (search(eid) == 1) {
             super.display();
             System.out.println("Employee Id " + employeeID);
@@ -629,7 +640,5 @@ class Faculty extends User {
         } else {
             return 0;
         }
-        
     }
-    
 }
