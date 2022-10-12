@@ -1,0 +1,126 @@
+import java.util.Scanner;
+class book{
+    private int bookid;
+    private String bookTitle;
+    private int yearOfPublication;
+    private String authorName;
+    private String publisherName;
+    private int numberOfAvailableCopies;
+    //private int totalCopies;
+    public void setDetails(int id,String title, int year,String author, String publisher, int count){
+        bookid=id;
+        bookTitle=title;
+        yearOfPublication=year;
+        authorName=author;
+        publisherName=publisher;
+        numberOfAvailableCopies=count;
+    }    
+    public void getDetails(int id){
+        bookid=id;
+    System.out.println("book name: "+bookTitle + ", "+"publication year: "+yearOfPublication+ ",  "+"author: "+authorName+",  "+"publisher: "+publisherName+",  "+"available copies: "+numberOfAvailableCopies);
+    }
+    public int check(){
+        return bookid; 
+    }
+    public void issue(int id){
+        bookid=id;
+        numberOfAvailableCopies--;
+    }
+    public void Return(int id){
+        bookid=id;
+        numberOfAvailableCopies++;
+    }
+}
+public class library_2101158{
+    public static void main(String args[]){
+        book arr[];
+        arr=new book[10];
+        arr[0]=new book();
+        arr[1]=new book();
+        arr[2]=new book();
+        arr[3]=new book();
+        arr[4]=new book();
+        
+        arr[0].setDetails(01,"Mindset",2006,"Carol Dweck","Ballantine Books ",8);
+        arr[1].setDetails(02,"Atomic Habits",2018,"James Clear","Penguin Random House",10);
+        arr[2].setDetails(03,"Ikagi:The japnese secret to a long and happy life",2016,"Francesc Miralles and Hector Garcia","Random House Uk",4);
+        arr[3].setDetails(04,"Rich Dad Poor Dad",1997,"Robert Kiyosaki and Sharon Lechter ","Warner",6);
+        arr[4].setDetails(05,"Psychology of Money",2020,"Morgan Housel","Jaico Publishing House",5);
+
+        Scanner sc=new Scanner(System.in);
+        int choice=0;
+        while(choice!=5){
+            System.out.println("Enter 1 to set details of book ");
+            System.out.println("Enter 2 to get details of book ");
+            System.out.println("Enter 3 to issue book");
+            System.out.println("Enter 4 to return book");
+            System.out.println("Enter 5 to exit");
+            choice=sc.nextInt();
+            switch(choice){
+                case 1: 
+                System.out.println("enter the id: ");
+                int id=sc.nextInt();
+                System.out.println("enter the name: ");
+                String name=sc.nextLine();
+                name=sc.nextLine();
+                System.out.println("enter the year: ");
+                int year=sc.nextInt();
+                System.out.println("enter the author: ");
+                String author=sc.nextLine();
+                author=sc.nextLine();
+                System.out.println("enter the publisher: ");
+                String publisher=sc.nextLine();
+                System.out.println("enter the copy count: ");
+                int count=sc.nextInt();
+                arr[5]=new book();
+                arr[5].setDetails(id,name,year,author,publisher,count);
+                break;
+    
+                case 2: 
+                System.out.println("enter the id: ");
+                id=sc.nextInt();
+                for(int i=0;i<10;i++){
+                    if(arr[i].check()==id){
+                        arr[i].getDetails(id);
+                        break;
+                    }
+                    else{
+                        continue;
+                    }
+                }
+                break;
+    
+                case 3: 
+                System.out.println("enter the id of the issued book: ");
+                id=sc.nextInt();
+                for(int i=0;i<10;i++){
+                    if(arr[i].check()==id){
+                        arr[i].issue(id);
+                        break;
+                    }
+                    else{
+                       continue;
+                    }
+                }
+                break;
+    
+                case 4: 
+                System.out.println("enter the id of the returned book: ");
+                id=sc.nextInt();
+                for(int i=0;i<10;i++){
+                    if(arr[i].check()==id){
+                        arr[i].Return(id);
+                        break;
+                    }
+                    else{
+                        continue;
+                    }
+                }
+                break;
+    
+                default:
+                return;
+            } 
+        }  
+    }
+}
